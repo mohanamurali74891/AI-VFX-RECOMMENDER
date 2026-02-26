@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI VFX Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #00c3ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0099cc;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        function showLoading() {
+            document.getElementById("spinner").style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>🎬 AI VFX Recommendation System</h2>
+
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+            <input type="file" name="video" required>
+            <br><br>
+            <button type="submit">Analyze Video</button>
+        </form>
+
+        <div id="spinner" class="spinner">
+            <p>Processing video... Please wait ⏳</p>
+        </div>
+
+        <h3>VFX Recommendations:</h3>
+        <ul>
+            {% for r in recommendations %}
+                <li>{{ r }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if graph %}
+            <img src="{{ graph }}" width="600">
+        {% endif %}
+    </div>
+</body>
+</html>
